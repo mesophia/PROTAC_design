@@ -19,4 +19,5 @@ The corresponding analysis scripts are:
 4. "MSM_pyemma.py" – for MSM construction and analysis
 
 NOTE:The input for the scripts require topology file (e.g. original.pdb) and md file with .xtc extension (e.g. MD.xtc).
+
 These scripts collectively enabled the extraction of dominant conformational features and kinetic states from the simulation trajectories.
