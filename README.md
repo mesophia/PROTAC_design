@@ -12,6 +12,7 @@ conda create -n pyemma-env python=2.7
 
 And then, please install PyEMMA within this environment.
 
+The input for the scripts require topology file (e.g. original.pdb) and md file with .xtc extension (e.g. MD.xtc)
 The corresponding analysis scripts are:
 1. "PCA_pyemma.py" – for PCA calculation
 2. "TICA_pyemma.py" – for TICA analysis
