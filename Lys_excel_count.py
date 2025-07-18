@@ -4,7 +4,7 @@ from openpyxl.styles import PatternFill
 import random
 
 # Load and filter original data
-input_file = "modified_pdbs/Lys_distance_RMSD.xlsx"
+input_file = "modified_pdbs/Lys_distance.xlsx"
 df = pd.read_excel(input_file)
 
 pdb_column = df.columns[0]  # PDB file column
@@ -27,7 +27,7 @@ for k in lys_filtered_data:
 df_filtered = pd.DataFrame(lys_filtered_data)
 
 # Save to Excel
-filtered_output_file = "modified_pdbs/Lys_filtered_RMSD.xlsx"
+filtered_output_file = "modified_pdbs/Lys_filtered.xlsx"
 df_filtered.to_excel(filtered_output_file, index=False)
 
 
@@ -78,7 +78,7 @@ summary_df = (
 )
 
 # Save final summary
-summary_output_file = "modified_pdbs/Lys_counts_RMSD.xlsx"
+summary_output_file = "modified_pdbs/Lys_counts.xlsx"
 summary_df.to_excel(summary_output_file, index=False)
 
 print(f"✅ All steps completed. Final output saved to: {summary_output_file}")
