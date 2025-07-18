@@ -75,7 +75,7 @@ def align_and_save_combined(pdb1, pdb2, chain1_id, chain2_id):
     return temp_pdb
 
 def calculate_lys_cys_distances(pdb_file, lys_chain="Y", cys_chain="G", cys_resnum=93):
-    """Calculates distances from Lysine (N) to Cysteine (SG)."""
+    """Calculates distances from terminal Lysine nitrogen (NZ) to Cysteine sulfur (SG)."""
     parser = PDB.PDBParser(QUIET=True)
     structure = parser.get_structure("aligned_complex", pdb_file)
 
@@ -83,12 +83,12 @@ def calculate_lys_cys_distances(pdb_file, lys_chain="Y", cys_chain="G", cys_resn
         cys_residue = next(res for res in structure[0][cys_chain] if res.get_resname() == "CYS" and res.get_id()[1] == cys_resnum)
         cys_atom = cys_residue["SG"]
     except (KeyError, StopIteration):
-        return None  
+        return None  # CYS 93 not found
 
     distances = {}
     for res in structure[0][lys_chain]:
-        if res.get_resname() == "LYS" and "N" in res:
-            lys_atom = res["N"]
+        if res.get_resname() == "LYS" and "NZ" in res:
+            lys_atom = res["NZ"]  # Use terminal amine nitrogen
             distances[f"Lys_{res.get_id()[1]}"] = cys_atom - lys_atom
 
     return distances
@@ -140,7 +140,7 @@ def process_pdb_directory(reference_pdb, pdb_directory, output_file):
 # Example Usage
 if __name__ == "__main__":
     reference_pdb = "8RX0_prepared.pdb"
-    pdb_directory = "/modified_pdbs"
-    output_file = "/modified_pdbs/Lys_distance_RMSD.xlsx"
+    pdb_directory = "modified_pdbs/"
+    output_file = "modified_pdbs/Lys_distance.xlsx"
     
     process_pdb_directory(reference_pdb, pdb_directory, output_file)
